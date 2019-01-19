@@ -19,6 +19,7 @@ const buildControls = (props) => (
             // tells it what ingredient/state item to update. Handler from BurgerBuilder.js is passed by reference
             added={()=> props.ingredientAdded(ctrl.type)}
             removed={()=> props.ingredientRemoved(ctrl.type)}
+            disabled={props.disabled[ctrl.type]}
             />
       ))}
         
