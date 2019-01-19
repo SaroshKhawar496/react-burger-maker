@@ -16,8 +16,9 @@ const buildControls = (props) => (
             key={ctrl.label} 
             label={ctrl.label}
             // ctrl.type is being passed back to ingredientAdded method which is Handler in BurgerBuilder.js
-            // tells it what ingredient/state item to update
+            // tells it what ingredient/state item to update. Handler from BurgerBuilder.js is passed by reference
             added={()=> props.ingredientAdded(ctrl.type)}
+            removed={()=> props.ingredientRemoved(ctrl.type)}
             />
       ))}
         
