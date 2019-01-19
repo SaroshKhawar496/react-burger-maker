@@ -23,23 +23,31 @@ const burger = (props) => {
       I need and key is imp for type of Ingredient
       */
     // its an array of arrays
-    const transforedIngredients = Object.keys(props.ingredients)
+    let transformedIngredients = Object.keys(props.ingredients)
     .map(igKey => {
         // length for Array is the amount of given ingredient
         // length of array matters not what the thing is
         return [...Array(props.ingredients[igKey])].map((_,i)=>{
             return <BurgerIngredient key={igKey+i} type={igKey} />;
         });
-    });
+    })
+    // adding reduce to check in case there are no 
+    // ingredients passed
+    .reduce((arr, el)=>{
+        return arr.concat(el)
+    },[]);
+    if (transformedIngredients.length === 0){
+        transformedIngredients = <p>Please add Ingredients!</p>
+    }
 
-    console.log(transforedIngredients);
+    console.log(transformedIngredients);
 
     return(
         <div className={classes.Burger}>
         {/* the type below is used for prop-types validation 
         in BurgerIngredient */}
         <BurgerIngredient type="bread-top" />
-        {transforedIngredients}
+        {transformedIngredients}
         <BurgerIngredient type="bread-bottom" />
         </div>
     );
