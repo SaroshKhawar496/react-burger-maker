@@ -12,7 +12,13 @@ const controls = [
 const buildControls = (props) => (
     <div className={classes.BuildControls}>
         {controls.map(ctrl =>(
-            <BuildControl key={ctrl.label} label={ctrl.label} />
+            <BuildControl
+            key={ctrl.label} 
+            label={ctrl.label}
+            // ctrl.type is being passed back to ingredientAdded method which is Handler in BurgerBuilder.js
+            // tells it what ingredient/state item to update
+            added={()=> props.ingredientAdded(ctrl.type)}
+            />
       ))}
         
     </div>
