@@ -24,8 +24,6 @@ const orderSummary = (props) => {
 
         </Aux>
     )
-
-
 };
 
 export default orderSummary;
