@@ -17,3 +17,15 @@
     height: 100%;
     
 }
+
+.Logo {
+    height: 80%;
+}
+
+/* for small devices we hide the toolbar.
+ It will show @499 and above */
+@media (max-width: 499px) {
+    .DesktopOnly {
+        display: none;
+    }
+}
