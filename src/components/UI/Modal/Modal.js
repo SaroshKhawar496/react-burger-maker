@@ -9,7 +9,11 @@ class Modal extends Component {
     // doesn't update neither does the OrderSummary
     shouldComponentUpdate(nextProps, nextState) {
         // will render it again only if the show changes
-        if (nextProps.show !== this.props.show) {
+        if (nextProps.show !== this.props.show
+            // adding or because modal should update when Spinner
+            // is passsed ie child changed
+            ||
+            nextProps.children !== this.props.children) {
             return true;
         }
         return false;
