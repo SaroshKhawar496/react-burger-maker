@@ -7,11 +7,57 @@ import Input from '../../../components/UI/Input/Input'
 
 class ContactData extends Component {
     state = {
-        name: '',
-        email: '',
-        address: {
-            street: '',
-            postalCode: ''
+        orderForm: {
+            name: {
+                elementType: 'input',
+                elementCofig: {
+                    type: 'text',
+                    placeholder: 'Your name'
+                },
+                value: ''
+            },
+            street: {
+                elementType: 'input',
+                elementCofig: {
+                    type: 'text',
+                    placeholder: 'Street'
+                },
+                value: ''
+            },
+            zipCode: {
+                elementType: 'input',
+                elementCofig: {
+                    type: 'text',
+                    placeholder: 'ZIP Code'
+                },
+                value: ''
+            },
+            country: {
+                elementType: 'input',
+                elementCofig: {
+                    type: 'text',
+                    placeholder: 'Country'
+                },
+                value: ''
+            },
+            email: {
+                elementType: 'input',
+                elementCofig: {
+                    type: 'email',
+                    placeholder: 'Email'
+                },
+                value: ''
+            },
+            deliverMethod: {
+                elementType: 'select',
+                elementCofig: {
+                    options: [
+                        {value: 'astest', displayValue:'Fastest'},
+                        {value: 'cheapest', displayValue:'Cheapest'}
+                ]
+                },
+                value: ''
+            },
         },
         loading: false
     }
@@ -28,16 +74,7 @@ class ContactData extends Component {
             // server. as the user might change it on front end and 
             // submit!
             price: this.props.price,
-            customer: {
-                name: 'Sarosh',
-                address: {
-                    street: 'test street 1',
-                    zipCode: '123123',
-                    country: 'Canada'
-                },
-                email: 'test@gmail.com'
-            },
-            deliverMethod: 'fastest'
+
         }
         // sending post request to firebase
         // for firebase, /orders will create a new node or route 
@@ -55,11 +92,25 @@ class ContactData extends Component {
     }
 
     render(){
+
+        const formElementsArray = [];
+        for (let key in this.state.orderForm){
+            formElementsArray.push({
+                id: key,
+                config: this.state.orderForm[key]
+            })
+        }
+
         let form = (<form>
-            <Input inputtype="input" type='text' name='name' placeholder='Your Name'/>
-            <Input inputtype="input" type='email' name='email' placeholder='Your Email'/>
-            <Input inputtype="input" type='text' name='street' placeholder='Street'/>
-            <Input inputtype="input" type='text' name='postal' placeholder='Postal Code'/>
+            
+            {formElementsArray.map(formElement => (
+                <Input
+                 key={formElement.id}
+                 elementType={formElement.config.elementType}
+                 elementCofig= {formElement.config.elementCofig}
+                 value= {formElement.config.value}/>
+            ))}
+            
             <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
         </form>
         );
