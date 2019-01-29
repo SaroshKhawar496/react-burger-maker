@@ -5,6 +5,7 @@ const button = (props) =>(
     <button
     // Button class is default, but props.btnType will 
     // be conditionally styled
+    disabled={props.disabled}
     className={[classes.Button, classes[props.btnType]].join(' ')}
     onClick={props.clicked}
     >{props.children}
