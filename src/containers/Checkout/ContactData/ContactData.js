@@ -67,6 +67,15 @@ class ContactData extends Component {
         event.preventDefault();
                 // alert('You continue!');
         this.setState({loading: true});
+        const formData = {};
+        // creating object like:
+        // name: value
+        // email: value etc
+        for(let formElementIdentifier in this.state.orderForm){
+            formData[formElementIdentifier] = 
+                this.state.orderForm[formElementIdentifier].value
+        }
+
 
         const order = {
             ingredients: this.props.ingredients,
@@ -74,6 +83,7 @@ class ContactData extends Component {
             // server. as the user might change it on front end and 
             // submit!
             price: this.props.price,
+            orderData: formData
 
         }
         // sending post request to firebase
@@ -114,7 +124,7 @@ class ContactData extends Component {
             })
         }
 
-        let form = (<form>
+        let form = (<form onSubmit={this.orderHandler}>
             
             {formElementsArray.map(formElement => (
                 <Input
@@ -126,7 +136,7 @@ class ContactData extends Component {
                  />
             ))}
             
-            <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
+            <Button btnType="Success">ORDER</Button>
         </form>
         );
 
