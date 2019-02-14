@@ -4,6 +4,7 @@ import classes from './ContactData.css';
 import axios from '../../../axios-orders';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input'
+import {connect} from 'react-redux'
 
 class ContactData extends Component {
     state = {
@@ -108,7 +109,7 @@ class ContactData extends Component {
 
 
         const order = {
-            ingredients: this.props.ingredients,
+            ingredients: this.props.ings,
             // for real app you would re-calculate the price on the
             // server. as the user might change it on front end and 
             // submit!
@@ -154,7 +155,7 @@ class ContactData extends Component {
         }
         // doing deep cloning/copy
         const updatedFormElement= {
-            ... updatedOrderForm[inputIdentifier]
+            ...updatedOrderForm[inputIdentifier]
         } 
         updatedFormElement.value = event.target.value;
         updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
@@ -212,5 +213,10 @@ class ContactData extends Component {
     }
     
 }
-
-export default ContactData;
+const mapStateToProps = state => {
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice
+    }
+}
+export default connect(mapStateToProps)(ContactData);
