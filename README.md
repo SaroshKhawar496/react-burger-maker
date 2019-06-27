@@ -1,3 +1,3 @@
 # React Application
-## It is a Interactive Burger Builder
+## It is an Interactive Burger Builder
 ### Visit https://react-burger-maker.herokuapp.com/ to check it out!
